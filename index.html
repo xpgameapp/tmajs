@@ -84,9 +84,13 @@
     <script>
         function openWallet(){
             const connector = new TonConnectSDK.TonConnect();
-            const awAddress = connector.wallet.account.address;
-            console.log("awAddress",awAddress);
-            document.getElementById("Log1").innerHTML= awAddress;
+            const walletConnectionSource = {
+                universalLink: 'https://app.tonkeeper.com/ton-connect',
+                bridgeUrl: 'https://bridge.tonapi.io/bridge'
+            }
+            const universalLink  = connector.connect(walletConnectionSource);
+            console.log("awAddress",universalLink);
+            document.getElementById("Log1").innerHTML= universalLink;
             connector.onStatusChange(wallet=>{
                 if (!wallet) {
                     return;
